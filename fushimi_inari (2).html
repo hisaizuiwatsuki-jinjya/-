@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>武州岩槻総鎮守 久伊豆神社｜伏見稲荷社</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Shippori+Mincho+B1:wght@400;500;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --vermilion: #c0392b;
+    --deep-red: #8b1a1a;
+    --gold: #c9a84c;
+    --gold-light: #e8d08a;
+    --ivory: #faf6f0;
+    --charcoal: #2c2c2c;
+    --smoke: #6b6156;
+    --paper: #f5ede0;
+    --dark-paper: #e8ddd0;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--ivory);
+    color: var(--charcoal);
+    font-family: 'Noto Serif JP', serif;
+    overflow-x: hidden;
+  }
+
+  /* 和紙テクスチャ背景 */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 100px,
+        rgba(180,150,100,0.03) 100px,
+        rgba(180,150,100,0.03) 101px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 100px,
+        rgba(180,150,100,0.03) 100px,
+        rgba(180,150,100,0.03) 101px
+      );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ヘッダー */
+  .header {
+    position: relative;
+    background: linear-gradient(180deg, var(--deep-red) 0%, var(--vermilion) 60%, #d4472a 100%);
+    padding: 3rem 2rem 4rem;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 60px;
+    background: var(--ivory);
+    clip-path: ellipse(55% 100% at 50% 100%);
+  }
+
+  .header-bushu {
+    font-family: 'Shippori Mincho B1', serif;
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 0.35em;
+    animation: fadeIn 1s ease forwards;
+    margin-bottom: 0.8rem;
+  }
+
+  .header-mon {
+    font-family: 'Shippori Mincho B1', serif;
+    font-size: 4.2rem;
+    color: var(--gold);
+    letter-spacing: 0.25em;
+    text-shadow: 0 2px 16px rgba(0,0,0,0.5), 0 0 40px rgba(201,168,76,0.3);
+    animation: fadeIn 1.2s ease forwards;
+    margin-bottom: 1rem;
+    line-height: 1.15;
+  }
+
+  .torii-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: floatUp 2s ease forwards;
+    opacity: 0;
+    display: block;
+  }
+
+  .header-label {
+    display: inline-block;
+    border: 1px solid var(--gold-light);
+    color: var(--gold-light);
+    padding: 0.3rem 1.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.4em;
+    animation: fadeIn 1.8s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes floatUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* メインコンテンツ */
+  .main {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+  }
+
+  /* 神名セクション */
+  .deity-section {
+    text-align: center;
+    padding: 2.5rem 2rem;
+    background: white;
+    border: 1px solid var(--dark-paper);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+    margin-bottom: 2rem;
+    position: relative;
+    animation: slideUp 0.8s ease 0.2s both;
+  }
+
+  .deity-section::before, .deity-section::after {
+    content: '✦';
+    position: absolute;
+    top: -0.7rem;
+    color: var(--gold);
+    background: white;
+    padding: 0 0.5rem;
+    font-size: 0.8rem;
+  }
+  .deity-section::before { left: 20%; }
+  .deity-section::after { right: 20%; }
+
+  .deity-name-jp {
+    font-family: 'Shippori Mincho B1', serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--deep-red);
+    letter-spacing: 0.15em;
+    margin-bottom: 0.4rem;
+  }
+
+  .deity-name-reading {
+    font-size: 0.85rem;
+    color: var(--smoke);
+    letter-spacing: 0.3em;
+    margin-bottom: 1rem;
+  }
+
+  .divider-ornament {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+    margin: 1rem 0;
+  }
+
+  .divider-ornament::before, .divider-ornament::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold));
+  }
+  .divider-ornament::after {
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  .divider-icon {
+    color: var(--gold);
+    font-size: 1rem;
+  }
+
+  /* 音声コントロールパネル */
+  .audio-panel {
+    background: linear-gradient(135deg, var(--deep-red), var(--vermilion));
+    border-radius: 2px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    animation: slideUp 0.8s ease 0.4s both;
+    box-shadow: 0 6px 30px rgba(139,26,26,0.3);
+  }
+
+  .audio-title {
+    color: var(--gold-light);
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    margin-bottom: 0.5rem;
+  }
+
+  .audio-controls {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+    flex: 1;
+    flex-wrap: wrap;
+  }
+
+  .btn-play {
+    background: var(--gold);
+    color: var(--deep-red);
+    border: none;
+    padding: 0.7rem 1.8rem;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.2em;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-play:hover {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  .btn-stop {
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 0.7rem 1.2rem;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.85rem;
+    cursor: pointer;
+    letter-spacing: 0.15em;
+    transition: all 0.2s;
+  }
+
+  .btn-stop:hover {
+    background: rgba(255,255,255,0.1);
+    color: white;
+  }
+
+  .speed-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255,255,255,0.8);
+    font-size: 0.8rem;
+  }
+
+  .speed-control select {
+    background: rgba(255,255,255,0.15);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 0.3rem 0.6rem;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+
+  .speed-control select option { color: black; background: white; }
+
+  .reading-status {
+    color: var(--gold-light);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    min-width: 100px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .status-dot.active {
+    opacity: 1;
+    animation: pulse 1s ease infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* コンテンツカード */
+  .content-card {
+    background: white;
+    border: 1px solid var(--dark-paper);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+    margin-bottom: 2rem;
+    animation: slideUp 0.8s ease 0.6s both;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .content-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--gold), var(--vermilion));
+  }
+
+  .card-header {
+    padding: 1.2rem 1.8rem 1rem 1.8rem;
+    border-bottom: 1px solid var(--dark-paper);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .card-header-icon {
+    color: var(--vermilion);
+    font-size: 1.2rem;
+  }
+
+  .card-header-title {
+    font-family: 'Shippori Mincho B1', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--deep-red);
+    letter-spacing: 0.1em;
+  }
+
+  .card-body {
+    padding: 1.8rem;
+  }
+
+  .text-content {
+    line-height: 2.2;
+    font-size: 0.95rem;
+    color: var(--charcoal);
+    letter-spacing: 0.05em;
+    text-align: justify;
+  }
+
+  .text-content p { margin-bottom: 1.2rem; }
+  .text-content p:last-child { margin-bottom: 0; }
+
+  /* ハイライトされたテキスト（読み上げ中）*/
+  .reading-highlight {
+    background: linear-gradient(180deg, transparent 60%, rgba(201,168,76,0.35) 60%);
+    transition: background 0.3s;
+  }
+
+  /* 特別情報セクション */
+  .info-card {
+    background: linear-gradient(135deg, #fdf8f0, #faf3e5);
+    border: 1px solid var(--gold-light);
+    border-left: 4px solid var(--gold);
+    padding: 1.5rem 1.8rem;
+    margin-bottom: 2rem;
+    animation: slideUp 0.8s ease 0.8s both;
+  }
+
+  .info-card-title {
+    font-family: 'Shippori Mincho B1', serif;
+    font-size: 1rem;
+    color: var(--deep-red);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    letter-spacing: 0.15em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .info-card-body {
+    font-size: 0.9rem;
+    line-height: 2;
+    color: var(--smoke);
+  }
+
+  .info-card-body strong {
+    color: var(--deep-red);
+    font-weight: 600;
+  }
+
+  /* 鳥居奉納セクション */
+  .torii-section {
+    background: linear-gradient(135deg, var(--deep-red) 0%, #a02020 100%);
+    padding: 2.5rem 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+    animation: slideUp 0.8s ease 1s both;
+    box-shadow: 0 6px 30px rgba(139,26,26,0.25);
+  }
+
+  .torii-section::before {
+    content: '鳥居';
+    position: absolute;
+    right: -1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Shippori Mincho B1', serif;
+    font-size: 8rem;
+    color: rgba(255,255,255,0.04);
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .torii-section-title {
+    font-family: 'Shippori Mincho B1', serif;
+    font-size: 1.4rem;
+    color: var(--gold-light);
+    letter-spacing: 0.25em;
+    margin-bottom: 1rem;
+  }
+
+  .torii-section-body {
+    color: rgba(255,255,255,0.85);
+    font-size: 0.9rem;
+    line-height: 2;
+    max-width: 500px;
+    margin: 0 auto 1.5rem;
+  }
+
+  .btn-contact {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--deep-red);
+    padding: 0.8rem 2.5rem;
+    font-family: 'Shippori Mincho B1', serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(201,168,76,0.3);
+    user-select: none;
+  }
+
+  .btn-contact:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  }
+
+  /* フッター */
+  .footer {
+    background: var(--charcoal);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+  }
+
+  .footer strong {
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* レスポンシブ */
+  @media (max-width: 600px) {
+    .header-mon { font-size: 2.2rem; }
+    .audio-panel { flex-direction: column; align-items: flex-start; }
+    .card-body { padding: 1.2rem; }
+    .main { padding: 2rem 1rem 4rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ヘッダー -->
+<header class="header">
+  <div class="header-bushu">武州岩槻総鎮守　久伊豆神社境内社</div>
+  <div class="header-mon">伏見稲荷社</div>
+  <div class="header-label">商売繁盛 &nbsp;•&nbsp; 家運隆昌</div>
+</header>
+
+<main class="main">
+
+  <!-- 御祭神 -->
+  <div class="deity-section">
+    <div class="deity-name-jp">宇迦之御魂大神</div>
+    <div class="deity-name-reading">うかのみたまのおおかみ</div>
+    <div class="divider-ornament"><span class="divider-icon">✦</span></div>
+    <div style="font-size: 0.85rem; color: var(--smoke); letter-spacing: 0.2em;">御祭神</div>
+  </div>
+
+  <!-- 音声読み上げパネル -->
+  <div class="audio-panel">
+    <div style="flex:1">
+      <div class="audio-title">▌ 音声読み上げ</div>
+      <div class="audio-controls">
+        <button class="btn-play" id="btnPlay" onclick="togglePlay()">
+          <span id="playIcon">▶</span>
+          <span id="playText">読み上げ開始</span>
+        </button>
+        <button class="btn-stop" onclick="stopReading()">■ 停止</button>
+
+      </div>
+    </div>
+    <div class="reading-status">
+      <div class="status-dot" id="statusDot"></div>
+      <span id="statusText">待機中</span>
+    </div>
+  </div>
+
+  <!-- 由緒 -->
+  <div class="content-card" id="yuyoCard">
+    <div class="card-header">
+      <span class="card-header-icon"></span>
+      <span class="card-header-title">由　緒</span>
+    </div>
+    <div class="card-body">
+      <div class="text-content" id="readableText">
+        <p>当社境内に祀る伏見稲荷社は、特に商売繁盛の御神徳をそなえられた神様です。いつ頃祀られたかは不明ですが、当社「本殿以下工作物登録台帳」（明治42年作成）に境内神社として稲荷社神殿が記載されており、明治42年12月28日付で南埼玉郡役所に登録されました。</p>
+        <p>「切妻造杉材・屋根杉皮葺」の社殿は明治42年には存在していたことがわかります。その後、昭和52年社殿の老朽化に伴い本殿北側より西側へ遷座。東京浅草の岡田宮師より「欅造・屋根銅葺」の宮型を購入。白川石（福島県白河地方産）の台座に据え、令和5年9月21日まで46年間、氏子及び崇敬者一同の商売繁盛と家運隆昌をお見守り頂いておりました。</p>
+        <p>この度の伏見稲荷社新社殿建設並びに修景工事におきまして、46年前の宮型を当時さながらに蘇らせ、さらに本殿西側より本殿北西側、「総檜造・屋根銅葺」の社殿にお納めいたしました。そして去る10月14日、お稲荷様の御霊（宇迦之御魂大神）の遷座祭をお仕えいたしました。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 稲荷信仰について -->
+  <div class="content-card">
+    <div class="card-header">
+      <span class="card-header-icon"></span>
+      <span class="card-header-title">稲荷信仰について</span>
+    </div>
+    <div class="card-body">
+      <div class="text-content" id="readableText2">
+        <p>全国に、稲荷神社は約三万社あるといわれており、また、個人の邸内社や企業などを加えると幾百万にも達します。江戸時代、稲荷信仰が江戸を中心として流行した為で、江戸の町のいたるところで見かけられるものとして「伊勢屋、稲荷に、犬の糞」とまで言われるようになったということです。</p>
+        <p>稲荷信仰の全国的普及は、おもに伏見稲荷大社をはじめとする宗教家の解説や宣伝によるものと共に、それを享受する民俗的な特徴も加わってのことだと思います。</p>
+        <p>昭和60年3月発行の岩槻市史通史編によると、岩槻の地区別にみても、多いものは稲荷社・天神社・神明社・久伊豆社・八幡社・第六天社・香取社の順となっており、稲荷・天満・神明・八幡などの神社は全国的傾向であることがわかります。当社も例外ではなく、稲荷様の御神徳やご加護を頂き、岩槻の鎮守としての役割を果たすべく境内社（末社）としてお祀りされたのでしょう。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 歴史年表 -->
+  <div class="info-card">
+    <div class="info-card-title">沿革</div>
+    <div class="info-card-body">
+      <strong>明治42年（1909年）</strong>　南埼玉郡役所への登録。切妻造杉材・屋根杉皮葺の社殿が確認される。<br>
+      <strong>昭和52年（1977年）</strong>　社殿老朽化に伴い本殿北側より西側へ遷座。欅造・屋根銅葺の宮型を設置。<br>
+      <strong>令和5年9月21日</strong>　旧社殿での最後のご奉仕。46年間の御守護に感謝。<br>
+      <strong>令和5年10月14日</strong>　新社殿（総檜造・屋根銅葺）への遷座祭を斎行。
+    </div>
+  </div>
+
+  <!-- 鳥居奉納 -->
+  <div class="torii-section">
+    <div class="torii-section-title">鳥居奉納のご案内</div>
+    <div class="torii-section-body">
+      新しく整えました稲荷社境内におきまして、特に商売繁盛のご信仰厚き方々より「朱塗りの鳥居」奉納を受付いたします。<br><br>
+      朱塗り鳥居には奉納年月日・会社名・お名前等を記入し建設いたします。
+    </div>
+    <a class="btn-contact" href="https://www.hisaizu.jp/contact.html" target="_blank" rel="noopener">
+      社務所へお問い合わせ
+    </a>
+  </div>
+
+</main>
+
+<!-- フッター -->
+<footer class="footer">
+  <strong>久伊豆神社</strong>
+  埼玉県さいたま市岩槻区宮町2丁目6-55
+</footer>
+
+<script>
+  const NARRATION_TEXT = `
+久伊豆神社の境内社、伏見稲荷社へ、ようこそお参りくださいました。
+
+御祭神は、宇迦之御魂大神。うかのみたまのおおかみ、と申し上げます。
+古くより、商売繁盛の御神徳をそなえられた、誠にありがたき神様でございます。
+
+いつ頃よりこの地にお祀りされたかは、定かではございません。
+ただ、明治四十二年に作成された「本殿以下工作物登録台帳」に、すでに稲荷社神殿の記載があり、同年十二月二十八日付で南埼玉郡役所に登録されておりました。
+切妻造り、杉材、屋根杉皮葺きの、清らかな社殿でございました。
+
+月日は流れ、昭和五十二年。社殿の老朽化に伴い、遷座が行われました。
+東京浅草の岡田宮師より、欅造り、屋根銅葺きの宮型を迎え入れ、福島県白河産の白川石の台座に、静かにお納めいたしました。
+それから四十六年の長きにわたり、お稲荷様は、氏子の皆さまと崇敬者一同の商売繁盛と、家運隆昌を、温かくお見守りくださいました。
+
+令和五年、新社殿の建設が叶いました。
+四十六年前の宮型を往時さながらに蘇らせ、総檜造り、屋根銅葺きの、美しい社殿にお納めいたしました。
+そして同年十月十四日、お稲荷様の御霊の遷座祭を、厳かにお仕えいたしました。
+
+全国に稲荷神社は約三万社あると申します。
+個人の邸内社や企業などを加えれば、幾百万にも達するほどの、大きな信仰でございます。
+江戸の時代には、「伊勢屋、稲荷に、犬の糞」とまで言われるほど、町のいたるところにお稲荷様がおられました。
+
+岩槻の地でも、稲荷社は古くから人々に親しまれてまいりました。
+当社もその例に漏れず、稲荷様の御神徳とご加護のもと、岩槻の鎮守として、今日まで大切にお祀りされております。
+
+どうぞ、ご参拝の折には、伏見稲荷社にも足をお運びいただき、どうかお心ゆくまでお参りくださいませ。
+  `.trim();
+
+  let audioContext = null;
+  let audioSource = null;
+  let isPlaying = false;
+  let audioBuffer = null;
+  let startTime = 0;
+  let pauseOffset = 0;
+  let isPaused = false;
+
+  async function fetchTTSAudio(text, voice) {
+    setStatus('音声を生成中...', true);
+
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-5-20250929',
+        max_tokens: 1024,
+        messages: [{
+          role: 'user',
+          content: `あなたは音声ナレーターです。以下のテキストをそのまま読み上げてください。返答はテキストのみで構いません:\n\n${text}`
+        }]
+      })
+    });
+
+    if (!response.ok) throw new Error('API error');
+    const data = await response.json();
+    return data.content?.[0]?.text || text;
+  }
+
+  // Web Speech API で自然な音声を生成（SSML風の調整付き）
+  function speakWithNaturalVoice(text, voiceKey) {
+    const synth = window.speechSynthesis;
+    synth.cancel();
+    isPaused = false;
+
+    // 文章を段落で分割してより自然な間を作る
+    const paragraphs = text.split('\n\n').filter(p => p.trim());
+
+    let currentIndex = 0;
+
+    function speakNext() {
+      if (currentIndex >= paragraphs.length) {
+        setPlayingState(false);
+        return;
+      }
+
+      const para = paragraphs[currentIndex];
+      const utter = new SpeechSynthesisUtterance(para);
+      utter.lang = 'ja-JP';
+
+      // 音声キャラクターの設定（Shimmerに最適化）
+      const voiceSettings = {
+        shimmer: { rate: 0.88, pitch: 1.08 },   // 自然なテンポ・やわらか・温かみ
+        alloy:   { rate: 0.85, pitch: 0.98 },
+        echo:    { rate: 0.80, pitch: 0.88 },
+        fable:   { rate: 0.83, pitch: 0.93 },
+        nova:    { rate: 0.87, pitch: 1.08 },
+        onyx:    { rate: 0.78, pitch: 0.82 },
+      };
+
+      const setting = voiceSettings[voiceKey] || voiceSettings.shimmer;
+      utter.rate = setting.rate;
+      utter.pitch = setting.pitch;
+      utter.volume = 1.0;
+
+      // 日本語音声を選択
+      const voices = synth.getVoices();
+      const preferred = voices.find(v => v.lang === 'ja-JP' && v.name.includes('Google')) ||
+                        voices.find(v => v.lang === 'ja-JP') ||
+                        voices.find(v => v.lang.startsWith('ja'));
+      if (preferred) utter.voice = preferred;
+
+      utter.onstart = () => {
+        if (currentIndex === 0) setPlayingState(true);
+      };
+
+      utter.onend = () => {
+        currentIndex++;
+        if (!isPaused) {
+          // 段落間に自然な間を置く
+          setTimeout(speakNext, 550);
+        }
+      };
+
+      utter.onerror = (e) => {
+        if (e.error !== 'interrupted' && e.error !== 'canceled') {
+          setPlayingState(false);
+          setStatus('エラーが発生しました');
+        }
+      };
+
+      synth.speak(utter);
+    }
+
+    speakNext();
+  }
+
+  function togglePlay() {
+    const synth = window.speechSynthesis;
+
+    if (isPaused) {
+      synth.resume();
+      isPaused = false;
+      setPlayingState(true);
+      return;
+    }
+
+    if (isPlaying) {
+      synth.pause();
+      isPaused = true;
+      setPlayingState(false, true);
+      return;
+    }
+
+    // 新規再生（Shimmer固定）
+    speakWithNaturalVoice(NARRATION_TEXT, 'shimmer');
+  }
+
+  function stopReading() {
+    const synth = window.speechSynthesis;
+    synth.cancel();
+    isPaused = false;
+    setPlayingState(false);
+  }
+
+  function setPlayingState(playing, paused = false) {
+    isPlaying = playing;
+    const icon = document.getElementById('playIcon');
+    const text = document.getElementById('playText');
+    const dot  = document.getElementById('statusDot');
+
+    if (playing) {
+      icon.textContent = '⏸';
+      text.textContent = '一時停止';
+      dot.classList.add('active');
+      setStatus('読み上げ中...');
+    } else if (paused) {
+      icon.textContent = '▶';
+      text.textContent = '再開する';
+      dot.classList.remove('active');
+      setStatus('一時停止中');
+    } else {
+      icon.textContent = '▶';
+      text.textContent = '読み上げ開始';
+      dot.classList.remove('active');
+      setStatus('待機中');
+    }
+  }
+
+  function setStatus(msg, loading = false) {
+    document.getElementById('statusText').textContent = msg;
+  }
+
+  if (window.speechSynthesis.onvoiceschanged !== undefined) {
+    window.speechSynthesis.onvoiceschanged = () => {};
+  }
+
+  window.addEventListener('beforeunload', () => {
+    window.speechSynthesis.cancel();
+  });
+</script>
+
+</body>
+</html>
