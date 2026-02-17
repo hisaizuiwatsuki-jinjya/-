@@ -190,7 +190,6 @@
     font-size: 1rem;
   }
 
-  /* 音声コントロールパネル */
   /* コンテンツカード */
   .content-card {
     background: white;
@@ -354,40 +353,6 @@
     font-size: 0.9rem;
   }
 
-  .qr-section {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255,255,255,0.1);
-  }
-
-  .qr-label {
-    font-size: 0.75rem;
-    letter-spacing: 0.3em;
-    color: rgba(255,255,255,0.4);
-    margin-bottom: 1rem;
-  }
-
-  .qr-wrapper {
-    display: inline-block;
-    background: white;
-    padding: 0.8rem;
-    border-radius: 2px;
-    margin-bottom: 0.8rem;
-  }
-
-  .qr-img {
-    display: block;
-    width: 120px;
-    height: 120px;
-  }
-
-  .qr-url {
-    font-size: 0.7rem;
-    color: rgba(255,255,255,0.35);
-    letter-spacing: 0.05em;
-    word-break: break-all;
-  }
-
   @keyframes slideUp {
     from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
@@ -479,24 +444,7 @@
 <footer class="footer">
   <strong>久伊豆神社</strong>
   埼玉県さいたま市岩槻区宮町2丁目6-55
-  <div class="qr-section">
-    <div class="qr-label">このページをスマホで見る</div>
-    <div class="qr-wrapper">
-      <img id="qrImg" src="" alt="QRコード" class="qr-img" />
-    </div>
-    <div class="qr-url" id="qrUrl"></div>
-  </div>
 </footer>
-
-<script>
-  // QRコード自動生成（現在のページURLから）
-  window.addEventListener('load', () => {
-    const url = window.location.href;
-    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(url)}&color=2c2c2c&bgcolor=ffffff`;
-    document.getElementById('qrImg').src = qrUrl;
-    document.getElementById('qrUrl').textContent = url;
-  });
-</script>
 
 </body>
 </html>
