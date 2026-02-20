@@ -27,31 +27,17 @@
     overflow-x: hidden;
   }
 
-  /* 和紙テクスチャ背景 */
   body::before {
     content: '';
     position: fixed;
     inset: 0;
     background-image:
-      repeating-linear-gradient(
-        90deg,
-        transparent,
-        transparent 100px,
-        rgba(180,150,100,0.03) 100px,
-        rgba(180,150,100,0.03) 101px
-      ),
-      repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 100px,
-        rgba(180,150,100,0.03) 100px,
-        rgba(180,150,100,0.03) 101px
-      );
+      repeating-linear-gradient(90deg, transparent, transparent 100px, rgba(180,150,100,0.03) 100px, rgba(180,150,100,0.03) 101px),
+      repeating-linear-gradient(0deg, transparent, transparent 100px, rgba(180,150,100,0.03) 100px, rgba(180,150,100,0.03) 101px);
     pointer-events: none;
     z-index: 0;
   }
 
-  /* ヘッダー */
   .header {
     position: relative;
     background: linear-gradient(180deg, var(--deep-red) 0%, var(--vermilion) 60%, #d4472a 100%);
@@ -89,14 +75,6 @@
     line-height: 1.15;
   }
 
-  .torii-icon {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-    animation: floatUp 2s ease forwards;
-    opacity: 0;
-    display: block;
-  }
-
   .header-label {
     display: inline-block;
     border: 1px solid var(--gold-light);
@@ -112,12 +90,6 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  @keyframes floatUp {
-    0% { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
-  }
-
-  /* メインコンテンツ */
   .main {
     position: relative;
     z-index: 1;
@@ -126,7 +98,6 @@
     padding: 3rem 1.5rem 5rem;
   }
 
-  /* 神名セクション */
   .deity-section {
     text-align: center;
     padding: 2.5rem 2rem;
@@ -185,12 +156,8 @@
     background: linear-gradient(90deg, var(--gold), transparent);
   }
 
-  .divider-icon {
-    color: var(--gold);
-    font-size: 1rem;
-  }
+  .divider-icon { color: var(--gold); font-size: 1rem; }
 
-  /* コンテンツカード */
   .content-card {
     background: white;
     border: 1px solid var(--dark-paper);
@@ -217,10 +184,7 @@
     gap: 0.8rem;
   }
 
-  .card-header-icon {
-    color: var(--vermilion);
-    font-size: 1.2rem;
-  }
+  .card-header-icon { color: var(--vermilion); font-size: 1.2rem; }
 
   .card-header-title {
     font-family: 'Shippori Mincho B1', serif;
@@ -228,11 +192,70 @@
     font-weight: 600;
     color: var(--deep-red);
     letter-spacing: 0.1em;
+    flex: 1;
   }
 
-  .card-body {
-    padding: 1.8rem;
+  .btn-audio {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: none;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 0.35rem 0.8rem;
+    font-family: 'Noto Serif JP', serif;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 2px;
+    -webkit-tap-highlight-color: transparent;
+    letter-spacing: 0.1em;
   }
+
+  .btn-audio:hover { background: rgba(201,168,76,0.1); }
+
+  .btn-audio.playing {
+    background: var(--gold);
+    color: var(--deep-red);
+  }
+
+  .btn-audio svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+  .mini-player {
+    display: none;
+    padding: 0.8rem 1.8rem;
+    background: linear-gradient(135deg, #2c2420, #3a302a);
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .mini-player.active { display: flex; }
+
+  .mini-progress-container {
+    flex: 1;
+    height: 3px;
+    background: rgba(255,255,255,0.1);
+    cursor: pointer;
+    border-radius: 2px;
+  }
+
+  .mini-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.1s linear;
+  }
+
+  .mini-time {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.4);
+    font-variant-numeric: tabular-nums;
+    min-width: 70px;
+    text-align: center;
+  }
+
+  .card-body { padding: 1.8rem; }
 
   .text-content {
     line-height: 2.2;
@@ -245,13 +268,6 @@
   .text-content p { margin-bottom: 1.2rem; }
   .text-content p:last-child { margin-bottom: 0; }
 
-  /* ハイライトされたテキスト（読み上げ中）*/
-  .reading-highlight {
-    background: linear-gradient(180deg, transparent 60%, rgba(201,168,76,0.35) 60%);
-    transition: background 0.3s;
-  }
-
-  /* 特別情報セクション */
   .info-card {
     background: linear-gradient(135deg, #fdf8f0, #faf3e5);
     border: 1px solid var(--gold-light);
@@ -268,29 +284,16 @@
     font-weight: 600;
     margin-bottom: 1rem;
     letter-spacing: 0.15em;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
   }
 
-  .info-card-body {
-    font-size: 0.9rem;
-    line-height: 2;
-    color: var(--smoke);
-  }
+  .info-card-body { font-size: 0.9rem; line-height: 2; color: var(--smoke); }
+  .info-card-body strong { color: var(--deep-red); font-weight: 600; }
 
-  .info-card-body strong {
-    color: var(--deep-red);
-    font-weight: 600;
-  }
-
-  /* 鳥居奉納セクション */
   .torii-section {
     background: linear-gradient(135deg, var(--deep-red) 0%, #a02020 100%);
     padding: 2.5rem 2rem;
     text-align: center;
     margin-bottom: 2rem;
-    position: relative;
     overflow: hidden;
     animation: slideUp 0.8s ease 1s both;
     box-shadow: 0 6px 30px rgba(139,26,26,0.25);
@@ -325,9 +328,7 @@
     cursor: pointer;
     border: none;
     transition: all 0.2s;
-    touch-action: manipulation;
     -webkit-tap-highlight-color: rgba(201,168,76,0.3);
-    user-select: none;
   }
 
   .btn-contact:hover {
@@ -336,7 +337,6 @@
     box-shadow: 0 6px 20px rgba(0,0,0,0.2);
   }
 
-  /* フッター */
   .footer {
     background: var(--charcoal);
     color: rgba(255,255,255,0.5);
@@ -358,17 +358,16 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  /* レスポンシブ */
   @media (max-width: 600px) {
     .header-mon { font-size: 2.2rem; }
     .card-body { padding: 1.2rem; }
     .main { padding: 2rem 1rem 4rem; }
+    .mini-player { padding: 0.8rem 1.2rem; }
   }
 </style>
 </head>
 <body>
 
-<!-- ヘッダー -->
 <header class="header">
   <div class="header-bushu">武州岩槻総鎮守　久伊豆神社境内社</div>
   <div class="header-mon">伏見稲荷社</div>
@@ -377,7 +376,6 @@
 
 <main class="main">
 
-  <!-- 御祭神 -->
   <div class="deity-section">
     <div class="deity-name-jp">宇迦之御魂大神</div>
     <div class="deity-name-reading">うかのみたまのおおかみ</div>
@@ -386,13 +384,23 @@
   </div>
 
   <!-- 由緒 -->
-  <div class="content-card" id="yuyoCard">
+  <div class="content-card">
     <div class="card-header">
       <span class="card-header-icon"></span>
       <span class="card-header-title">由　緒</span>
+      <button class="btn-audio" id="btnYuisho" onclick="toggleAudio('yuisho')">
+        <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg>
+        <span>音声ガイド</span>
+      </button>
+    </div>
+    <div class="mini-player" id="playerYuisho">
+      <div class="mini-progress-container" onclick="seekAudio(event, 'yuisho')">
+        <div class="mini-progress-bar" id="progressYuisho"></div>
+      </div>
+      <span class="mini-time" id="timeYuisho">0:00 / 0:00</span>
     </div>
     <div class="card-body">
-      <div class="text-content" id="readableText">
+      <div class="text-content">
         <p>当社境内に祀る伏見稲荷社は、特に商売繁盛の御神徳をそなえられた神様です。いつ頃祀られたかは不明ですが、当社「本殿以下工作物登録台帳」（明治42年作成）に境内神社として稲荷社神殿が記載されており、明治42年12月28日付で南埼玉郡役所に登録されました。</p>
         <p>「切妻造杉材・屋根杉皮葺」の社殿は明治42年には存在していたことがわかります。その後、昭和52年社殿の老朽化に伴い本殿北側より西側へ遷座。東京浅草の岡田宮師より「欅造・屋根銅葺」の宮型を購入。白川石（福島県白河地方産）の台座に据え、令和5年9月21日まで46年間、氏子及び崇敬者一同の商売繁盛と家運隆昌をお見守り頂いておりました。</p>
         <p>この度の伏見稲荷社新社殿建設並びに修景工事におきまして、46年前の宮型を当時さながらに蘇らせ、さらに本殿西側より本殿北西側、「総檜造・屋根銅葺」の社殿にお納めいたしました。そして去る10月14日、お稲荷様の御霊（宇迦之御魂大神）の遷座祭をお仕えいたしました。</p>
@@ -405,9 +413,19 @@
     <div class="card-header">
       <span class="card-header-icon"></span>
       <span class="card-header-title">稲荷信仰について</span>
+      <button class="btn-audio" id="btnInari" onclick="toggleAudio('inari')">
+        <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg>
+        <span>音声ガイド</span>
+      </button>
+    </div>
+    <div class="mini-player" id="playerInari">
+      <div class="mini-progress-container" onclick="seekAudio(event, 'inari')">
+        <div class="mini-progress-bar" id="progressInari"></div>
+      </div>
+      <span class="mini-time" id="timeInari">0:00 / 0:00</span>
     </div>
     <div class="card-body">
-      <div class="text-content" id="readableText2">
+      <div class="text-content">
         <p>全国に、稲荷神社は約三万社あるといわれており、また、個人の邸内社や企業などを加えると幾百万にも達します。江戸時代、稲荷信仰が江戸を中心として流行した為で、江戸の町のいたるところで見かけられるものとして「伊勢屋、稲荷に、犬の糞」とまで言われるようになったということです。</p>
         <p>稲荷信仰の全国的普及は、おもに伏見稲荷大社をはじめとする宗教家の解説や宣伝によるものと共に、それを享受する民俗的な特徴も加わってのことだと思います。</p>
         <p>昭和60年3月発行の岩槻市史通史編によると、岩槻の地区別にみても、多いものは稲荷社・天神社・神明社・久伊豆社・八幡社・第六天社・香取社の順となっており、稲荷・天満・神明・八幡などの神社は全国的傾向であることがわかります。当社も例外ではなく、稲荷様の御神徳やご加護を頂き、岩槻の鎮守としての役割を果たすべく境内社（末社）としてお祀りされたのでしょう。</p>
@@ -415,7 +433,6 @@
     </div>
   </div>
 
-  <!-- 歴史年表 -->
   <div class="info-card">
     <div class="info-card-title">沿革</div>
     <div class="info-card-body">
@@ -426,7 +443,6 @@
     </div>
   </div>
 
-  <!-- 鳥居奉納 -->
   <div class="torii-section">
     <div class="torii-section-title">鳥居奉納のご案内</div>
     <div class="torii-section-body">
@@ -440,11 +456,110 @@
 
 </main>
 
-<!-- フッター -->
 <footer class="footer">
   <strong>久伊豆神社</strong>
   埼玉県さいたま市岩槻区宮町2丁目6-55
 </footer>
+
+<script>
+  const audioFiles = {
+    yuisho: new Audio('yuisho.mp3'),
+    inari: new Audio('inari-shinko.mp3')
+  };
+  const playing = {};
+
+  function getElements(id) {
+    const map = { yuisho: 'Yuisho', inari: 'Inari' };
+    const cap = map[id];
+    return {
+      btn: document.getElementById('btn' + cap),
+      player: document.getElementById('player' + cap),
+      progress: document.getElementById('progress' + cap),
+      time: document.getElementById('time' + cap)
+    };
+  }
+
+  function toggleAudio(id) {
+    const audio = audioFiles[id];
+    const el = getElements(id);
+
+    // 他の音声を停止
+    Object.keys(audioFiles).forEach(key => {
+      if (key !== id && playing[key]) {
+        audioFiles[key].pause();
+        audioFiles[key].currentTime = 0;
+        playing[key] = false;
+        const other = getElements(key);
+        other.btn.classList.remove('playing');
+        updateBtnIcon(other.btn, false);
+        other.player.classList.remove('active');
+        other.progress.style.width = '0%';
+      }
+    });
+
+    if (playing[id]) {
+      audio.pause();
+      playing[id] = false;
+      el.btn.classList.remove('playing');
+      updateBtnIcon(el.btn, false);
+    } else {
+      audio.play().then(() => {
+        playing[id] = true;
+        el.btn.classList.add('playing');
+        el.player.classList.add('active');
+        updateBtnIcon(el.btn, true);
+      }).catch(err => console.log('再生エラー:', err));
+    }
+  }
+
+  function updateBtnIcon(btn, isPlaying) {
+    const svg = btn.querySelector('svg');
+    if (isPlaying) {
+      svg.innerHTML = '<rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/>';
+    } else {
+      svg.innerHTML = '<polygon points="6,3 20,12 6,21"/>';
+    }
+    btn.querySelector('span').textContent = isPlaying ? '一時停止' : '音声ガイド';
+  }
+
+  function seekAudio(e, id) {
+    const audio = audioFiles[id];
+    if (!audio.duration) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const ratio = (e.clientX - rect.left) / rect.width;
+    audio.currentTime = ratio * audio.duration;
+  }
+
+  function formatTime(sec) {
+    if (!sec || isNaN(sec)) return '0:00';
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60);
+    return m + ':' + (s < 10 ? '0' : '') + s;
+  }
+
+  function updateProgress() {
+    Object.keys(audioFiles).forEach(id => {
+      const audio = audioFiles[id];
+      const el = getElements(id);
+      if (audio.duration) {
+        el.progress.style.width = (audio.currentTime / audio.duration) * 100 + '%';
+        el.time.textContent = formatTime(audio.currentTime) + ' / ' + formatTime(audio.duration);
+      }
+    });
+    requestAnimationFrame(updateProgress);
+  }
+  updateProgress();
+
+  Object.keys(audioFiles).forEach(id => {
+    audioFiles[id].addEventListener('ended', () => {
+      playing[id] = false;
+      const el = getElements(id);
+      el.btn.classList.remove('playing');
+      updateBtnIcon(el.btn, false);
+      el.progress.style.width = '0%';
+    });
+  });
+</script>
 
 </body>
 </html>
